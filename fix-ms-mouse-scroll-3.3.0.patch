@@ -1,31 +1,32 @@
-diff --git a/drivers/hid/hid-core.c b/drivers/hid/hid-core.c
-index 990fe19..8356ef7 100644
---- a/drivers/hid/hid-core.c
-+++ b/drivers/hid/hid-core.c
-@@ -1485,6 +1485,7 @@ static const struct hid_device_id hid_have_special_driver[] = {
+diff -pru a/drivers/hid/hid-core.c b/drivers/hid/hid-core.c
+--- a/drivers/hid/hid-core.c	2012-03-19 03:15:34.000000000 +0400
++++ b/drivers/hid/hid-core.c	2015-09-21 23:06:22.095629502 +0300
+@@ -1473,6 +1473,8 @@ static const struct hid_device_id hid_ha
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROCHIP, USB_DEVICE_ID_PICOLCD) },
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROCHIP, USB_DEVICE_ID_PICOLCD_BOOTLOADER) },
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_COMFORT_MOUSE_4500) },
 +	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_WIRELESS_MOUSE_KSERIES) },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_SCULPT_ERGONOMIC_MOUSE) },
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_SIDEWINDER_GV) },
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_NE4K) },
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_LK6K) },
-diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
-index 3eb0090..1ba69c8 100644
---- a/drivers/hid/hid-ids.h
-+++ b/drivers/hid/hid-ids.h
-@@ -531,6 +531,7 @@
+Only in b/drivers/hid: hid-core.c.orig
+diff -pru a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
+--- a/drivers/hid/hid-ids.h	2012-03-19 03:15:34.000000000 +0400
++++ b/drivers/hid/hid-ids.h	2015-09-21 23:01:19.288486255 +0300
+@@ -514,6 +514,8 @@
  #define USB_DEVICE_ID_MS_PRESENTER_8K_USB	0x0713
  #define USB_DEVICE_ID_MS_DIGITAL_MEDIA_3K	0x0730
  #define USB_DEVICE_ID_MS_COMFORT_MOUSE_4500	0x076c
-+#define USB_DEVICE_ID_MS_WIRELESS_MOUSE_KSERIES 0x0745
++#define USB_DEVICE_ID_MS_WIRELESS_MOUSE_KSERIES	0x0745
++#define USB_DEVICE_ID_MS_SCULPT_ERGONOMIC_MOUSE	0x07a5
  
  #define USB_VENDOR_ID_MOJO		0x8282
  #define USB_DEVICE_ID_RETRO_ADAPTER	0x3201
-diff --git a/drivers/hid/hid-microsoft.c b/drivers/hid/hid-microsoft.c
-index e5c699b..19d5dca 100644
---- a/drivers/hid/hid-microsoft.c
-+++ b/drivers/hid/hid-microsoft.c
+Only in b/drivers/hid: hid-ids.h.orig
+diff -pru a/drivers/hid/hid-microsoft.c b/drivers/hid/hid-microsoft.c
+--- a/drivers/hid/hid-microsoft.c	2012-03-19 03:15:34.000000000 +0400
++++ b/drivers/hid/hid-microsoft.c	2015-09-21 23:07:11.816142941 +0300
 @@ -29,6 +29,7 @@
  #define MS_RDESC		0x08
  #define MS_NOGET		0x10
@@ -34,7 +35,7 @@ index e5c699b..19d5dca 100644
  
  /*
   * Microsoft Wireless Desktop Receiver (Model 1028) has
-@@ -155,6 +156,51 @@ static int ms_event(struct hid_device *hdev, struct hid_field *field,
+@@ -155,6 +156,51 @@ static int ms_event(struct hid_device *h
  	return 0;
  }
  
@@ -86,7 +87,7 @@ index e5c699b..19d5dca 100644
  static int ms_probe(struct hid_device *hdev, const struct hid_device_id *id)
  {
  	unsigned long quirks = id->driver_data;
-@@ -178,6 +224,11 @@ static int ms_probe(struct hid_device *hdev, const struct hid_device_id *id)
+@@ -178,6 +224,11 @@ static int ms_probe(struct hid_device *h
  		goto err_free;
  	}
  
@@ -98,12 +99,14 @@ index e5c699b..19d5dca 100644
  	return 0;
  err_free:
  	return ret;
-@@ -199,6 +250,8 @@ static const struct hid_device_id ms_devices[] = {
+@@ -198,6 +249,10 @@ static const struct hid_device_id ms_dev
+ 		.driver_data = MS_NOGET },
  	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_COMFORT_MOUSE_4500),
  		.driver_data = MS_DUPLICATE_USAGES },
- 
 +	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_WIRELESS_MOUSE_KSERIES),
 +		.driver_data = MS_VSCROLL },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_SCULPT_ERGONOMIC_MOUSE),
++		.driver_data = MS_VSCROLL },
+ 
  	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_PRESENTER_8K_BT),
  		.driver_data = MS_PRESENTER },
- 	{ }

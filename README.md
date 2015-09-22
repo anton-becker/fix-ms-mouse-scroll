@@ -86,3 +86,6 @@ Following name convention is used:
    #define MS_RDESC_3K		0x40
   ```
   so `MS_VSCROLL` defined value should be `0x80` (`0x40` * 2).
+
+#History
+Based on patch from [resetmsmice](http://sourceforge.net/projects/resetmsmice/). Thank you, Paul F. Richards.

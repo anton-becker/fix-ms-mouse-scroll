@@ -46,6 +46,7 @@ Following name convention is used:
 
 # How to view usb device vendor id and device id (aka product id)
  1. Find it in kernel log
+
     Use something like `sudo journalctl -k` or `sudo less /var/log/dmesg`. Example output:
 
     ```
@@ -57,6 +58,7 @@ Following name convention is used:
 
     where `045e` - vendor id, `07a5` - device id.
  2. Using `lsusb`
+
     Run `lsusb` to show installed devices. Example output:
 
     ```

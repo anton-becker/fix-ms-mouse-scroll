@@ -11,17 +11,17 @@ fix-ms-mouse-scroll patch for Linux kernel can fixes this behaviour.
  Only Microsoft mice are supported, so device usb vendor id should be 0x045e.
  Usb devices with following device id supported:
   * 0x07a5:
-   ** Microsoft sculpt ergonomic mouse
+   * Microsoft sculpt ergonomic mouse
   * 0x0745 - Not sure, possible following mice:
-   ** Microsoft Wireless Mouse 1000
-   ** Microsoft Wireless Optical Desktop 3000
-   ** Microsoft Wireless Mobile Mouse 3500
-   ** Microsoft Wireless Mobile Mouse 4000
-   ** Microsoft Comfort Mouse 4500
-   ** Microsoft Wireless Mouse 5000
+   * Microsoft Wireless Mouse 1000
+   * Microsoft Wireless Optical Desktop 3000
+   * Microsoft Wireless Mobile Mouse 3500
+   * Microsoft Wireless Mobile Mouse 4000
+   * Microsoft Comfort Mouse 4500
+   * Microsoft Wireless Mouse 5000
 
 # Supported Linux kernels
- Patches tested on the following vanilla kernel and/or [gentoo default kernel](https://packages.gentoo.org/package/sys-kernel/gentoo-sources):
+ Patches tested on the following vanilla kernel and/or [Gentoo default kernel](https://packages.gentoo.org/package/sys-kernel/gentoo-sources):
   1. 3.3.0 (tested only compilation)
   2. 4.0.5 (tested compilation & really working)
   3. 4.2.0 (tested only compilation)
@@ -29,8 +29,8 @@ fix-ms-mouse-scroll patch for Linux kernel can fixes this behaviour.
 
 # Choose appropriate patch version
 Following name convention is used:
- fix-ms-mouse-scroll-<v>.patch
- where "<v>" - primary kernel version for witch patch is developed.
+ `fix-ms-mouse-scroll-<v>.patch`
+ where `<v\>` - primary kernel version for witch patch is developed.
   * For kernel <3.3.0 try to use "fix-ms-mouse-scroll-3.3.0.patch"
   * For kernel 3.3.0 use "fix-ms-mouse-scroll-3.3.0.patch"
   * For kernel >3.3.0 but <4.0.5 try to use "fix-ms-mouse-scroll-3.3.0.patch" or "fix-ms-mouse-scroll-4.0.5.patch" (choose version with wich there is no error at kernel "build")
@@ -46,14 +46,18 @@ Following name convention is used:
 # How to view usb device vendor id and device id (aka product id)
  1. Find it in kernel log
   Use something like `sudo journalctl -k` or `sudo less /var/log/dmesg`. Example output:
-  `usb 1-4: New USB device found, idVendor=045e, idProduct=07a5
+  ```
+  usb 1-4: New USB device found, idVendor=045e, idProduct=07a5
   usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
   usb 1-4: Product: Microsoft® 2.4GHz Transceiver v9.0
-  usb 1-4: Manufacturer: Microsoft`
+  usb 1-4: Manufacturer: Microsoft
+  ```
   where "045e" - vendor id, "07a5" - device id.
  2. Using `lsusb`
   Run `lsusb` to show installed devices. Example output:
-  `Bus 001 Device 002: ID 045e:07a5 Microsoft Corp.`
+  `
+  Bus 001 Device 002: ID 045e:07a5 Microsoft Corp.
+  `
   where "045e" - vendor id, "07a5" - device id.
 
 # Add new mouse support
@@ -65,11 +69,13 @@ Following name convention is used:
 # Apply patch to kernel newer then 4.3.0
  Be shure that after apllying patch to such kernels in file "drivers/hid/hid-microsoft.c" MS_VSCROLL define have unique value over the block of MS_ defines. Multiply MS_VSCROLL defined value by 2 while it isn't unique if needed.
  E.g., 4.0.5 has following block:
-  `#define MS_HIDINPUT		0x01
+  ```c
+   #define MS_HIDINPUT		0x01
    #define MS_ERGONOMY		0x02
    #define MS_PRESENTER		0x04
    #define MS_RDESC		0x08
    #define MS_NOGET		0x10
    #define MS_DUPLICATE_USAGES	0x20
-   #define MS_RDESC_3K		0x40`
+   #define MS_RDESC_3K		0x40
+  ```
   so MS_VSCROLL	defined value should be 0x80 (0x40 * 2).

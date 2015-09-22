@@ -46,22 +46,24 @@ Following name convention is used:
 
 # How to view usb device vendor id and device id (aka product id)
  1. Find it in kernel log
-  Use something like `sudo journalctl -k` or `sudo less /var/log/dmesg`. Example output:
+    Use something like `sudo journalctl -k` or `sudo less /var/log/dmesg`. Example output:
 
-  ```
-  usb 1-4: New USB device found, idVendor=045e, idProduct=07a5
-  usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
-  usb 1-4: Product: Microsoft® 2.4GHz Transceiver v9.0
-  usb 1-4: Manufacturer: Microsoft
-  ```
+    ```
+    usb 1-4: New USB device found, idVendor=045e, idProduct=07a5
+    usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+    usb 1-4: Product: Microsoft® 2.4GHz Transceiver v9.0
+    usb 1-4: Manufacturer: Microsoft
+    ```
 
-  where `045e` - vendor id, `07a5` - device id.
+    where `045e` - vendor id, `07a5` - device id.
  2. Using `lsusb`
-  Run `lsusb` to show installed devices. Example output:
-  `
-  Bus 001 Device 002: ID 045e:07a5 Microsoft Corp.
-  `
-  where `045e` - vendor id, `07a5` - device id.
+    Run `lsusb` to show installed devices. Example output:
+
+    ```
+    Bus 001 Device 002: ID 045e:07a5 Microsoft Corp.
+    ```
+
+    where `045e` - vendor id, `07a5` - device id.
 
 # Add new mouse support
  If you have Microsoft mouse with scroll bug and mouse isn't supported by this patch do following:

@@ -2,17 +2,17 @@
  Patch to fix scroll wheel problems with certain Microsoft mice in Linux.
 
 # Problem exploration
-Some wireless Microsoft mouses have strange behaviour in Linux after working in Microsoft Windows - scroll is too fast. Possible workaround - reinsert mouse receiver to usb (i.e. power off receiver). More information can be found here:
+Some wireless Microsoft mice have strange behaviour in Linux after working in Microsoft Windows - scroll is too fast. Possible workaround - reinsert mouse receiver to usb (i.e. power off receiver). More information can be found here:
  * [http://sourceforge.net/projects/resetmsmice/](http://sourceforge.net/projects/resetmsmice/)
  * [https://bbs.archlinux.org/viewtopic.php?id=177916](https://bbs.archlinux.org/viewtopic.php?id=177916)
 fix-ms-mouse-scroll patch for Linux kernel can fixes this behaviour.
 
-# Supported mouses
- Only Microsoft mouses are supported, so device usb vendor id should be 0x045e.
+# Supported mice
+ Only Microsoft mice are supported, so device usb vendor id should be 0x045e.
  Usb devices with following device id supported:
   * 0x07a5:
    ** Microsoft sculpt ergonomic mouse
-  * 0x0745 - Not sure, possible following mouses:
+  * 0x0745 - Not sure, possible following mice:
    ** Microsoft Wireless Mouse 1000
    ** Microsoft Wireless Optical Desktop 3000
    ** Microsoft Wireless Mobile Mouse 3500
@@ -60,7 +60,7 @@ Following name convention is used:
  If you have Microsoft mouse with scroll bug and mouse isn't supported by this patch do following:
  1. Change "0x07a5" in patch to your mouse device id
  2. Apply modified patch
- 3. If modified patch help you to resolve scroll bug - let me know and I extend supported mouses.
+ 3. If modified patch help you to resolve scroll bug - let me know and I extend supported mice.
 
 # Apply patch to kernel newer then 4.3.0
  Be shure that after apllying patch to such kernels in file "drivers/hid/hid-microsoft.c" MS_VSCROLL define have unique value over the block of MS_ defines. Multiply MS_VSCROLL defined value by 2 while it isn't unique if needed.

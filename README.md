@@ -39,10 +39,10 @@ Following name convention is used:
   * For kernel >4.3.0 try to use `fix-ms-mouse-scroll-4.0.5.patch` and look at special notes about such case (or ask me to update patch if kernel build failed)
 
 # How to apply patch
- 1. Download appropriate patch (e.g. `/home/unsacrificed/Downloads/fix-ms-mouse-scroll-4.0.5.patch`)
- 2. In terminal `cd` to directory with your kernel sources (e.g. `cd /usr/src/linux-4.0.5-gentoo`)
- 3. Apply patch with `patch -p1` command (e.g. `patch -p1 < /home/unsacrificed/Downloads/fix-ms-mouse-scroll-4.0.5.patch`)
- 4. Rebuild and install your kernel as usual (no special kernel configuration needed)
+ 1. Download appropriate patch (e.g. `/home/unsacrificed/Downloads/fix-ms-mouse-scroll-4.0.5.patch`),
+ 2. In terminal `cd` to directory with your kernel sources (e.g. `cd /usr/src/linux-4.0.5-gentoo`),
+ 3. Apply patch with `patch -p1` command (e.g. `patch -p1 < /home/unsacrificed/Downloads/fix-ms-mouse-scroll-4.0.5.patch`),
+ 4. Rebuild and install your kernel as usual (no special kernel configuration needed).
 
 # How to view usb device vendor id and device id (aka product id)
  1. Find it in kernel log
@@ -55,23 +55,23 @@ Following name convention is used:
   usb 1-4: Manufacturer: Microsoft
   ```
 
-  where "045e" - vendor id, "07a5" - device id.
+  where `045e` - vendor id, `07a5` - device id.
  2. Using `lsusb`
   Run `lsusb` to show installed devices. Example output:
   `
   Bus 001 Device 002: ID 045e:07a5 Microsoft Corp.
   `
-  where "045e" - vendor id, "07a5" - device id.
+  where `045e` - vendor id, `07a5` - device id.
 
 # Add new mouse support
  If you have Microsoft mouse with scroll bug and mouse isn't supported by this patch do following:
- 1. Change "0x07a5" in patch to your mouse device id
- 2. Apply modified patch
+ 1. Change `0x07a5` (in line `+#define USB_DEVICE_ID_MS_SCULPT_ERGONOMIC_MOUSE	0x07a5`) in patch to your mouse device id,
+ 2. Apply modified patch,
  3. If modified patch help you to resolve scroll bug - let me know and I extend supported mice.
 
 # Apply patch to kernel newer then 4.3.0
- Be shure that after apllying patch to such kernels in file "drivers/hid/hid-microsoft.c" MS_VSCROLL define have unique value over the block of MS_ defines. Multiply MS_VSCROLL defined value by 2 while it isn't unique if needed.
- E.g., 4.0.5 has following block:
+ Be shure that after apllying patch to such kernels in file `drivers/hid/hid-microsoft.c` `MS_VSCROLL` define have unique value over the block of `MS_` defines. Multiply `MS_VSCROLL` defined value by 2 while it isn't unique if needed.
+ E.g., kernel 4.0.5 has following block:
   ```c
    #define MS_HIDINPUT		0x01
    #define MS_ERGONOMY		0x02
@@ -81,4 +81,4 @@ Following name convention is used:
    #define MS_DUPLICATE_USAGES	0x20
    #define MS_RDESC_3K		0x40
   ```
-  so MS_VSCROLL	defined value should be 0x80 (0x40 * 2).
+  so `MS_VSCROLL` defined value should be `0x80` (`0x40` * 2).

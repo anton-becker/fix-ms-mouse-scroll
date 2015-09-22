@@ -5,7 +5,7 @@
 Some wireless Microsoft mice have strange behaviour in Linux after working in Microsoft Windows - scroll is too fast. Possible workaround - reinsert mouse receiver to usb (i.e. power off receiver). More information can be found here:
  * [http://sourceforge.net/projects/resetmsmice/](http://sourceforge.net/projects/resetmsmice/)
  * [https://bbs.archlinux.org/viewtopic.php?id=177916](https://bbs.archlinux.org/viewtopic.php?id=177916)
- fix-ms-mouse-scroll patch for Linux kernel can fixes this behaviour.
+fix-ms-mouse-scroll patch for Linux kernel can fixes this behaviour.
 
 # Supported mice
  Only Microsoft mice are supported, so device usb vendor id should be 0x045e.

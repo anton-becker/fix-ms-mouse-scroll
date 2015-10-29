@@ -74,7 +74,7 @@ Following name convention is used:
  3. If modified patch help you to resolve scroll bug - let me know and I extend supported mice.
 
 # Apply patch to kernel newer then 4.3.0
- Be shure that after apllying patch to such kernels in file `drivers/hid/hid-microsoft.c` `MS_VSCROLL` define have unique value over the block of `MS_` defines. Multiply `MS_VSCROLL` defined value by 2 while it isn't unique if needed.
+ Be sure that after apllying patch to such kernels in file `drivers/hid/hid-microsoft.c` `MS_VSCROLL` define have unique value over the block of `MS_` defines. Multiply `MS_VSCROLL` defined value by 2 while it isn't unique if needed.
  E.g., kernel 4.0.5 has following block:
   ```c
    #define MS_HIDINPUT		0x01
